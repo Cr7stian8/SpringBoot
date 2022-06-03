@@ -66,7 +66,7 @@ public class ProdutoController {
 	
 	//Delete -> deleta dados
 	@DeleteMapping("/{id}")
-	public void delete(@Valid @PathVariable String id) {
+	public void delete(@Valid @PathVariable Long id) {
 		repository.deleteById(id);
 	}
 }
