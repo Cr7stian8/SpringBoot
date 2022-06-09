@@ -28,38 +28,38 @@ public class CategoriaController {
 	// Transferir responsabilidade para o Produto Repository
 	@Autowired
 	private CategoriaRepository repository;
-	
+
 	// GetAll
 	@GetMapping
 	public ResponseEntity<List<Categoria>> Getall() {
 		return ResponseEntity.ok(repository.findAll());
 	}
-	
+
 	// GetById
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> GetById(@PathVariable long Id){
-		return repository.findById(Id)
-				.map(resposta -> ResponseEntity.ok(resposta))
+	public ResponseEntity<Categoria> GetById(@PathVariable long Id) {
+		return repository.findById(Id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+
 	// GetByCategoria
 	@GetMapping("/categoria/{categoria}")
 	public ResponseEntity<List<Categoria>> getByName(@PathVariable String categoria) {
 		return ResponseEntity.ok(repository.findAllBycategoriaContainingIgnoreCase(categoria));
 	}
+
 	// Post
 	@PostMapping
 	public ResponseEntity<Categoria> AdicionaTema(@RequestBody Categoria categoria) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
 	}
-	
+
 	// Put
 	@PutMapping
 	public ResponseEntity<Categoria> atualizaTema(@RequestBody Categoria categoria) {
 		return ResponseEntity.ok(repository.save(categoria));
 	}
-	
+
 	// Delete
 	@DeleteMapping("/{id}")
 	public void deletaTema(@PathVariable long id) {
